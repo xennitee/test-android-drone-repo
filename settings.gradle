@@ -1,0 +1,2 @@
+include 'src:android-client'
+rootProject.name='MG2'

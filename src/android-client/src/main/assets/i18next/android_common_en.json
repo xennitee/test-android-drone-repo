@@ -1,0 +1,22 @@
+{
+  "app": {
+    "name": "MG2",
+    "leave_dialog_title": "Quit",
+    "leave_dialog_message": "Are you sure to leave MG2?",
+    "leave_dialog_button_confirm": "Yes",
+    "leave_dialog_button_decline": "No"
+  },
+  "login": {
+    "sign_in": "Sign-in",
+    "sign_in_other_error": "There was an issue with sign in. Please try again later.",
+    "players_exception": "There was an issue communicating with players.",
+    "status_exception_error": "%1$s (status %2$d). %3$s."
+  },
+  "pay": {
+    "prepare_for_google_pay": "Preparing for Google Pay",
+    "ready_for_google_pay": "Google Pay is ready",
+    "msg_for_failed_payment": "Payment failed. This is possibly due to unstable networks. Please try again later.",
+    "error_on_preparing_for_google_pay": "There are some issues using Google Pay",
+    "did_not_retrieve_publishable_key": "Backend server connection error, please try again later"
+  }
+}

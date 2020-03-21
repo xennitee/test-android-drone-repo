@@ -1,0 +1,102 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+def versionMajor = 0
+def versionMinor = 0
+def versionPatch = 2
+def versionStage = "pre-a"
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "app3cm.mg2"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        archivesBaseName = "MG2-v$versionName-$versionStage"
+    }
+    signingConfigs {
+        release
+    }
+    buildTypes {
+        debug {
+            versionNameSuffix "-T"
+            resValue "string", "app_version", "${defaultConfig.versionName}${versionNameSuffix}"
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            versionNameSuffix "-R"
+            resValue "string", "app_version", "${defaultConfig.versionName}"
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets', '../../i18n']
+        }
+    }
+    aaptOptions {
+        ignoreAssetsPattern 'lib'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // generic libraries
+    implementation 'com.i18next:i18next-android:1.0.0'
+
+    // Firebase Authentication
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    // Google Pay integration via Stripe
+    implementation 'com.stripe:stripe-android:14.1.0'
+    implementation 'com.google.android.gms:play-services-wallet:18.0.0'
+
+    // OkHttp & GSON
+    implementation 'com.squareup.okhttp3:okhttp:4.4.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Google Play Billing
+    implementation 'com.android.billingclient:billing:2.1.0'
+}
+
+Properties props = new Properties()
+def propFile = new File('signing.properties')
+def keyFileName
+if (propFile.canRead()) {
+    props.load(new FileInputStream(propFile))
+
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        keyFileName = 'KEYSTORE_FILE_WINDOWS'
+    } else {
+        keyFileName = 'KEYSTORE_FILE_LINUX'
+    }
+    if (props != null && props.containsKey(keyFileName) && props.containsKey('KEYSTORE_PASSWORD') &&
+            props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+        android.signingConfigs.release.storeFile = file(props[keyFileName])
+        android.signingConfigs.release.storePassword = props['KEYSTORE_PASSWORD']
+        android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+        android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+    } else {
+        println 'signing.properties found but some entries are missing'
+        android.buildTypes.release.signingConfig = null
+    }
+} else {
+    println 'signing.properties not found'
+    android.buildTypes.release.signingConfig = null
+}

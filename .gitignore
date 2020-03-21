@@ -1,0 +1,94 @@
+#
+# mac os
+#
+.DS_Store
+.AppleDouble
+.LSOverride
+# Icon must end with two \r
+\Icon
+# Thumbnails
+._*
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+#
+# Windows
+#
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+# Folder config file
+Desktop.ini
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+# Windows shortcuts
+*.lnk
+
+#
+# linux
+#
+
+*~
+# KDE directory preferences
+.directory
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+#
+# project ignore files.
+#
+*.log
+
+/.cache/
+/.log/
+/.report/
+/.storage/
+/.tmp/
+
+/node_modules/
+/vendor/
+.idea/
+/coverage/
+
+/dist/
+/cordova/
+/crosswalk/
+/release/
+/i18n/*.json
+
+# Android Studio & Gradle
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/captures
+.externalNativeBuild
+.cxx
+/src/android-client/build
+/src/android-client/.classpath
+/src/android-client/.project
+/src/android-client/.settings/
+.project
+/.settings/
+/src/.project
+/src/.settings/
+/signing.properties
+/build/intermediates/

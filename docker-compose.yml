@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  android-client:
+    image: openjdk:8
+    volumes:
+      - ./:/app
+    working_dir: /app
+    environment:
+      - SDK_URL=https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+      - ANDROID_HOME=/usr/local/android-sdk
+      - ANDROID_VERSION=29
+      - ANDROID_BUILD_TOOLS_VERSION=29.0.3
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mkdir "$$ANDROID_HOME" .android
+        cd "$$ANDROID_HOME"
+        curl -o sdk.zip $$SDK_URL
+        unzip sdk.zip
+        rm sdk.zip
+        yes | $$ANDROID_HOME/tools/bin/sdkmanager --licenses
+        $$ANDROID_HOME/tools/bin/sdkmanager --update
+        $$ANDROID_HOME/tools/bin/sdkmanager \
+        "build-tools;$${ANDROID_BUILD_TOOLS_VERSION}" \
+        "platforms;android-$${ANDROID_VERSION}" \
+        "platform-tools"
+        ./gradlew clean
+        ./gradlew assembleDebug

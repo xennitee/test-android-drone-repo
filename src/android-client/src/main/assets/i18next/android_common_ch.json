@@ -1,0 +1,20 @@
+{
+  "app": {
+    "name": "金錢遊戲2",
+    "leave_dialog_title": "離開",
+    "leave_dialog_message": "確定離開金錢遊戲2嗎？",
+    "leave_dialog_button_confirm": "是",
+    "leave_dialog_button_decline": "不要"
+  },
+  "login": {
+    "sign_in": "登入",
+    "sign_in_other_error": "There was an issue with sign in. Please try again later.",
+    "players_exception": "There was an issue communicating with players.",
+    "status_exception_error": "%1$s (status %2$d). %3$s."
+  },
+  "pay": {
+    "prepare_for_google_pay": "Google Pay 準備中…",
+    "ready_for_google_pay": "開始使用 Google Pay 吧",
+    "msg_for_failed_payment": "付款失敗。可能是網路不穩定所導致，請稍後再試。"
+  }
+}

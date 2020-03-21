@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "905727491781",
+    "firebase_url": "https://xx-3cm.firebaseio.com",
+    "project_id": "xx-3cm",
+    "storage_bucket": "xx-3cm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905727491781:android:c3ea4c23c8ac84b3a5faac",
+        "android_client_info": {
+          "package_name": "app3cm.mg2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "905727491781-gfcvf66vnv8ta4g5v3995trm5kbrjd2o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app3cm.mg2",
+            "certificate_hash": "3ca29bae7a67cab6a368d4b70e088d467191e3de"
+          }
+        },
+        {
+          "client_id": "905727491781-k9k3e3smg6ee5v2ol3bdo7olr1pc953t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app3cm.mg2",
+            "certificate_hash": "6b9a45c19a35c2d2a1fe9cbc542dd347d17c4a2d"
+          }
+        },
+        {
+          "client_id": "905727491781-hister96gii06mbphdil9eef70a7hr8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxTASTN71xh_35MLOjH0bxdvaiQc85C_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "905727491781-hister96gii06mbphdil9eef70a7hr8s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

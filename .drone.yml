@@ -1,0 +1,12 @@
+kind: pipeline
+name: default
+
+limit:
+  concurrency: 1
+  per_branch: true
+
+steps:
+- name: build android
+  image: xennitee/android-docker-image:0
+  commands:
+    - ./gradlew assembleDebug
