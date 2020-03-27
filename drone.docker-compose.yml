@@ -1,0 +1,47 @@
+version: '3'
+services:
+  drone:
+    image: drone/drone:1
+    restart: always
+    network_mode: "default"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "3"
+    volumes:
+      - /data/drone/db:/data
+    environment:
+      - DRONE_GITHUB_CLIENT_ID=fbc7379d5416d6f674bc
+      - DRONE_GITHUB_CLIENT_SECRET=41506c8b1896de3035456dbb2b3b4dfac1cff387
+      - DRONE_RPC_SECRET=51c82345e8d0317b2b1d47bd55119b8e
+      - DRONE_SERVER_HOST=35.247.125.24
+      - DRONE_SERVER_PROTO=http
+      - DRONE_LOGS_DEBUG=true
+      - DRONE_LOGS_PRETTY=true
+      - DRONE_LOGS_COLOR=true
+      - DRONE_USER_CREATE=username:xennitee,admin:true
+      - DRONE_USER_FILTER=xennitee
+    ports:
+      - 8000:80
+      - 33000:80
+  drone-runner:
+    image: drone/drone-runner-docker:1
+    restart: always
+    network_mode: "default"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "3"
+    depends_on:
+      - drone
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_RPC_HOST=35.247.125.24
+      - DRONE_RPC_PROTO=http
+      - DRONE_RPC_SECRET=51c82345e8d0317b2b1d47bd55119b8e
+      - DRONE_RUNNER_CAPACITY=1
+    ports:
+      - 3000:3000
