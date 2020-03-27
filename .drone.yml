@@ -9,4 +9,4 @@ steps:
 - name: build android
   image: xennitee/android-docker-image:0
   commands:
-    - ./gradlew buildDebug
+    - ./gradlew assembleDebug
