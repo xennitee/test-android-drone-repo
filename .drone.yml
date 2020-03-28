@@ -6,6 +6,11 @@ limit:
   per_branch: true
 
 steps:
+- name: build android
+  image: xennitee/android-docker-image:0
+  commands:
+    - ./gradlew assembleDebug
+
 - name: publish to github release
   image: plugins/github-release
   settings:
@@ -15,4 +20,5 @@ steps:
     prerelease: true
     note: src/android-client/CHANGELOG.md
   when:
-    event: tag
+    branch:
+    - master
