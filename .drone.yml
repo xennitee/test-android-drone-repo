@@ -26,7 +26,7 @@ steps:
     note: src/android-client/CHANGELOG.md
     overwrite: true
   when:
-    status:
-    - success
     event:
     - tag
+    branch:
+    - master
