@@ -10,3 +10,12 @@ steps:
   image: xennitee/android-docker-image:0
   commands:
     - ./gradlew assembleDebug
+- name: publish to github release
+  image: plugins/github-release
+  settings:
+    api_key: /root/.ssh/id_rsa
+    files: src/android-client/build/outputs/apk/debug/*.apk
+    prerelease: true
+    note: src/android-client/CHANGELOG.md
+  when:
+    event: tag
