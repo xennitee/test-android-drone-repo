@@ -21,7 +21,7 @@ steps:
   image: xennitee/android-docker-image:0
   commands:
     - ./gradlew assembleDebug
-    - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/output/
+    - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/outputs/
   when:
     branch:
     - master
@@ -32,7 +32,7 @@ steps:
   image: plugins/github-release
   settings:
     api_key: 11d402907387d60538d18edb98f45262c2427a64
-    files: /data/drone/output/*.apk
+    files: /data/drone/outputs/*.apk
     draft: true
     prerelease: true
     note: src/android-client/CHANGELOG.md
