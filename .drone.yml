@@ -19,6 +19,6 @@ steps:
     draft: true
     prerelease: true
     note: src/android-client/CHANGELOG.md
+    overwrite: true
   when:
-    branch:
-    - master
+    event: tag
