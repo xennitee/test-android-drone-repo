@@ -10,6 +10,11 @@ steps:
   image: xennitee/android-docker-image:0
   commands:
     - ./gradlew assembleDebug
+  when:
+    branch:
+    - master
+    event:
+    - pull_request
 
 - name: publish to github release
   image: plugins/github-release
@@ -19,6 +24,9 @@ steps:
     draft: true
     prerelease: true
     note: src/android-client/CHANGELOG.md
+    overwrite: true
   when:
-    branch:
-    - master
+    status:
+    - success
+    event:
+    - tag
