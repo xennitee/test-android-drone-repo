@@ -9,18 +9,30 @@ steps:
 - name: build android
   image: xennitee/android-docker-image:0
   commands:
-    - ./gradlew assembleDebug
+    - ./gradlew buildDebug
   when:
     branch:
     - master
     event:
     - pull_request
 
+steps:
+- name: build android
+  image: xennitee/android-docker-image:0
+  commands:
+    - ./gradlew assembleDebug
+    - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/output/
+  when:
+    branch:
+    - master
+    event:
+    - tag
+
 - name: publish to github release
   image: plugins/github-release
   settings:
     api_key: 11d402907387d60538d18edb98f45262c2427a64
-    files: src/android-client/build/outputs/apk/debug/*.apk
+    files: /data/drone/output/*.apk
     draft: true
     prerelease: true
     note: src/android-client/CHANGELOG.md
