@@ -32,7 +32,8 @@ steps:
 - name: publish to github release
   image: plugins/github-release
   settings:
-    api_key: $/data/drone/.credential/api.github.token
+    api_key:
+      from_secret: github_release_token
     files: src/android-client/build/outputs/apk/debug/*.apk
     draft: true
     prerelease: true
