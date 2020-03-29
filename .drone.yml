@@ -13,7 +13,7 @@ steps:
     path: /data/drone/cache/
   commands:
     - pwd
-    - ./gradlew buildDebug
+    - ./gradlew assembleDebug
     - ls src/android-client/build/outputs/apk/debug/*.apk
   when:
     event: pull_request
