@@ -12,17 +12,7 @@ steps:
   - name: cache
     path: /data/drone/cache/
   commands:
-    - pwd
-    - ./gradlew assembleDebug
-    - ls src/android-client/build/outputs/apk/debug/*.apk
-  when:
-    event: pull_request
-    branch:
-      exclude: master
-- name: test temp volume
-  image: xennitee/android-docker-image:0
-  commands:
-    - ls src/android-client/build/outputs/apk/debug/*.apk
+    - ./gradlew buildDebug
   when:
     event: pull_request
     branch:
