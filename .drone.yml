@@ -23,7 +23,7 @@ steps:
     event: pull_request
     branch:
       exclude: master
-- name: build android
+- name: temp volume catch test
   image: xennitee/android-docker-image:0
   volumes:
   - name: cache
