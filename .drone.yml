@@ -12,7 +12,7 @@ steps:
   - name: cache
     path: /data/drone/cache/
   commands:
-    - ./gradlew buildDebug
+    - ls -al
   when:
     event: pull_request
     branch:
@@ -24,7 +24,7 @@ steps:
   - name: cache
     path: /data/drone/cache/
   commands:
-    - mkdir src/android-client/build/outputs/apk/debug/xxxxxx.apk
+    - ./gradlew assembleDebug
   when:
     event:
     - tag
@@ -32,14 +32,12 @@ steps:
 - name: publish to github release
   image: plugins/github-release
   settings:
-    api_key: a9b42701f53f21f777270c2e11a69fffdba54828
+    api_key: /data/drone/.credential/api.github.token
     files: src/android-client/build/outputs/apk/debug/*.apk
     draft: true
     prerelease: true
     note: src/android-client/CHANGELOG.md
     overwrite: true
-  commands:
-    - env
   when:
     event:
     - tag
