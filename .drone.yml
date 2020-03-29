@@ -32,7 +32,7 @@ steps:
 - name: publish to github release
   image: plugins/github-release
   settings:
-    api_key: eae6d04015b234bf7bf013b1993786d2155995b5
+    api_key: 9049c7789dbb3844a4bf34014328188326f46d23
     files: src/android-client/build/outputs/apk/debug/*.apk
     draft: true
     prerelease: true
