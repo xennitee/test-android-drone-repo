@@ -32,12 +32,14 @@ steps:
 - name: publish to github release
   image: plugins/github-release
   settings:
-    api_key: 16a4a2482475434525b4b9066cbce025cbda187a
+    api_key: a9b42701f53f21f777270c2e11a69fffdba54828
     files: src/android-client/build/outputs/apk/debug/*.apk
     draft: true
     prerelease: true
     note: src/android-client/CHANGELOG.md
     overwrite: true
+  commands:
+    - env
   when:
     event:
     - tag
