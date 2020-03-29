@@ -19,12 +19,13 @@ steps:
 steps:
 - name: build android
   image: xennitee/android-docker-image:0
+  volumes:
+  - name: cache
+    path: /data/drone/cache
   commands:
     - ./gradlew assembleDebug
     - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/outputs/
   when:
-    branch:
-    - master
     event:
     - tag
 
@@ -40,5 +41,3 @@ steps:
   when:
     event:
     - tag
-    branch:
-    - master
