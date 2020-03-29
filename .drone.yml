@@ -6,7 +6,7 @@ limit:
   per_branch: true
 
 steps:
-- name: build
+- name: build android
   image: xennitee/android-docker-image:0
   commands:
     - ./gradlew buildDebug
@@ -15,8 +15,7 @@ steps:
     branch:
       exclude: master
 
-steps:
-- name: output
+- name: android output
   image: xennitee/android-docker-image:0
   volumes:
   - name: cache
