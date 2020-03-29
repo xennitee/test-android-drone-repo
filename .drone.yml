@@ -10,24 +10,17 @@ steps:
   image: xennitee/android-docker-image:0
   volumes:
   - name: cache
-    path: /data/drone/cache
+    path: /data/drone/cache/
   commands:
     - pwd
-    - ./gradlew assembleDebug
-    - ls src/android-client/build/
-    - ls src/android-client/build/outputs/
-    - ls src/android-client/build/outputs/apk/
-    - ls src/android-client/build/outputs/apk/debug/
+    - ./gradlew buildDebug
     - ls src/android-client/build/outputs/apk/debug/*.apk
   when:
     event: pull_request
     branch:
       exclude: master
-- name: temp volume catch test
+- name: test temp volume
   image: xennitee/android-docker-image:0
-  volumes:
-  - name: cache
-    path: /data/drone/cache
   commands:
     - ls src/android-client/build/outputs/apk/debug/*.apk
   when:
@@ -39,10 +32,9 @@ steps:
   image: xennitee/android-docker-image:0
   volumes:
   - name: cache
-    path: /data/drone/cache/outputs
+    path: /data/drone/cache/
   commands:
     - ./gradlew assembleDebug
-    - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/cache/outputs
   when:
     event:
     - tag
@@ -51,7 +43,7 @@ steps:
   image: plugins/github-release
   settings:
     api_key: 11d402907387d60538d18edb98f45262c2427a64
-    files: /data/drone/outputs/*.apk
+    files: src/android-client/build/outputs/apk/debug/*.apk
     draft: true
     prerelease: true
     note: src/android-client/CHANGELOG.md
