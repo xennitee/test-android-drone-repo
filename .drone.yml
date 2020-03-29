@@ -8,10 +8,15 @@ limit:
 steps:
 - name: build android
   image: xennitee/android-docker-image:0
+  volumes:
+  - name: cache
+    path: /data/drone/cache/outputs
   commands:
     - pwd
     - ./gradlew buildDebug
-    - ls src/android-client
+    - ls src/android-client/build/outputs/apk/debug/*.apk
+    - ls /data/drone/cache/
+    - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/cache/outputs
   when:
     event: pull_request
     branch:
