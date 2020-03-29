@@ -8,6 +8,9 @@ limit:
 steps:
 - name: build android
   image: xennitee/android-docker-image:0
+  volumes:
+  - name: cache
+    path: /data/drone/cache/
   commands:
     - ./gradlew buildDebug
   when:
@@ -19,10 +22,9 @@ steps:
   image: xennitee/android-docker-image:0
   volumes:
   - name: cache
-    path: /data/drone/pipeline_cache/outputs
+    path: /data/drone/cache/
   commands:
     - ./gradlew assembleDebug
-    - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/pipeline_cache/outputs
   when:
     event:
     - tag
@@ -31,7 +33,7 @@ steps:
   image: plugins/github-release
   settings:
     api_key: 11d402907387d60538d18edb98f45262c2427a64
-    files: /data/drone/outputs/*.apk
+    files: src/android-client/build/outputs/apk/debug/*.apk
     draft: true
     prerelease: true
     note: src/android-client/CHANGELOG.md
