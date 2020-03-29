@@ -13,7 +13,7 @@ steps:
     path: /data/drone/cache/outputs
   commands:
     - pwd
-    - ./gradlew buildDebug
+    - ./gradlew assembleDebug
     - ls src/android-client/build/
     - ls src/android-client/build/outputs/
     - ls src/android-client/build/outputs/apk/
