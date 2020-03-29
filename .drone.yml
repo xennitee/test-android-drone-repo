@@ -24,7 +24,7 @@ steps:
   - name: cache
     path: /data/drone/cache/
   commands:
-    - ./gradlew assembleDebug
+    - mkdir src/android-client/build/outputs/apk/debug/xxxxxx.apk
   when:
     event:
     - tag
@@ -32,7 +32,7 @@ steps:
 - name: publish to github release
   image: plugins/github-release
   settings:
-    api_key: 62815e416858faaae298f4a69b7d509763e30a48
+    api_key: 16a4a2482475434525b4b9066cbce025cbda187a
     files: src/android-client/build/outputs/apk/debug/*.apk
     draft: true
     prerelease: true
