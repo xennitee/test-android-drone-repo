@@ -10,6 +10,11 @@ steps:
   image: xennitee/android-docker-image:0
   commands:
     - ./gradlew buildDebug
+  when:
+    branch:
+      exclude: master
+    event:
+    - pull_request
 
 steps:
 - name: build android
@@ -19,7 +24,7 @@ steps:
     path: /data/drone/pipeline_cache/outputs
   commands:
     - ./gradlew assembleDebug
-    - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/outputs/
+    - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/pipeline_cache/outputs
   when:
     event:
     - tag
