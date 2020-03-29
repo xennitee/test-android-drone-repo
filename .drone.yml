@@ -9,7 +9,9 @@ steps:
 - name: build android
   image: xennitee/android-docker-image:0
   commands:
+    - pwd
     - ./gradlew buildDebug
+    - ls src/android-client
   when:
     event: pull_request
     branch:
@@ -19,10 +21,10 @@ steps:
   image: xennitee/android-docker-image:0
   volumes:
   - name: cache
-    path: /data/drone/pipeline_cache/outputs
+    path: /data/drone/cache/outputs
   commands:
     - ./gradlew assembleDebug
-    - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/pipeline_cache/outputs
+    - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/cache/outputs
   when:
     event:
     - tag
