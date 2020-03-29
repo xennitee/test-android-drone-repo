@@ -14,6 +14,10 @@ steps:
   commands:
     - pwd
     - ./gradlew buildDebug
+    - ls src/android-client/build/
+    - ls src/android-client/build/outputs/
+    - ls src/android-client/build/outputs/apk/
+    - ls src/android-client/build/outputs/apk/debug/
     - ls src/android-client/build/outputs/apk/debug/*.apk
     - ls /data/drone/cache/
     - mv src/android-client/build/outputs/apk/debug/*.apk /data/drone/cache/outputs
