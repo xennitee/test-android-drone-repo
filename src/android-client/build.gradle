@@ -77,26 +77,21 @@ dependencies {
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
-//def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystorePropertiesFile
+def keyFileName
 if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
-    keystorePropertiesFile = file("D:/git/keystore.properties")
+    keystorePropertiesFile = rootProject.file("keystore.properties")
+    keyFileName = 'KEYSTORE_FILE_WINDOWS'
 } else {
     keystorePropertiesFile = file("/data/drone/.android/keystore.properties")
+    keyFileName = 'KEYSTORE_FILE_LINUX'
 }
 
 // Initialize a new Properties() object called keystoreProperties.
 def keystoreProperties = new Properties()
 
-def keyFileName
 if (keystorePropertiesFile.canRead()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
-    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
-        keyFileName = 'KEYSTORE_FILE_WINDOWS'
-    } else {
-        keyFileName = 'KEYSTORE_FILE_LINUX'
-    }
 
     def keystoreFile = file(keystoreProperties[keyFileName])
     if (keystoreProperties != null && keystoreFile.exists() &&
@@ -108,8 +103,6 @@ if (keystorePropertiesFile.canRead()) {
         android.signingConfigs.release.storePassword = keystoreProperties['KEYSTORE_PASSWORD']
         android.signingConfigs.release.keyAlias = keystoreProperties['KEY_ALIAS']
         android.signingConfigs.release.keyPassword = keystoreProperties['KEY_PASSWORD']
-    } else if (!keystoreFile.exists()) {
-        println 'invalid path for keystore file'
     } else {
         println 'keystore.properties found but some entries are missing or invalid'
         android.buildTypes.release.signingConfig = null
