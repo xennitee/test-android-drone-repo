@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# uncompleted
+
 export SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip" \
     ANDROID_HOME="/usr/local/android-sdk" \
     ANDROID_VERSION=29 \

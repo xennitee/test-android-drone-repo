@@ -75,28 +75,46 @@ dependencies {
     implementation 'com.android.billingclient:billing:2.1.0'
 }
 
-Properties props = new Properties()
-def propFile = new File('signing.properties')
+// Create a variable called keystorePropertiesFile, and initialize it to your
+// keystore.properties file, in the rootProject folder.
+//def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystorePropertiesFile
+if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+    keystorePropertiesFile = file("D:/git/keystore.properties")
+} else {
+    keystorePropertiesFile = file("/data/drone/.android/keystore.properties")
+}
+
+// Initialize a new Properties() object called keystoreProperties.
+def keystoreProperties = new Properties()
+
 def keyFileName
-if (propFile.canRead()) {
-    props.load(new FileInputStream(propFile))
+if (keystorePropertiesFile.canRead()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
     if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
         keyFileName = 'KEYSTORE_FILE_WINDOWS'
     } else {
         keyFileName = 'KEYSTORE_FILE_LINUX'
     }
-    if (props != null && props.containsKey(keyFileName) && props.containsKey('KEYSTORE_PASSWORD') &&
-            props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
-        android.signingConfigs.release.storeFile = file(props[keyFileName])
-        android.signingConfigs.release.storePassword = props['KEYSTORE_PASSWORD']
-        android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
-        android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+
+    def keystoreFile = file(keystoreProperties[keyFileName])
+    if (keystoreProperties != null && keystoreFile.exists() &&
+            keystoreProperties.containsKey(keyFileName) &&
+            keystoreProperties.containsKey('KEYSTORE_PASSWORD') &&
+            keystoreProperties.containsKey('KEY_ALIAS') &&
+            keystoreProperties.containsKey('KEY_PASSWORD')) {
+        android.signingConfigs.release.storeFile = file(keystoreProperties[keyFileName])
+        android.signingConfigs.release.storePassword = keystoreProperties['KEYSTORE_PASSWORD']
+        android.signingConfigs.release.keyAlias = keystoreProperties['KEY_ALIAS']
+        android.signingConfigs.release.keyPassword = keystoreProperties['KEY_PASSWORD']
+    } else if (!keystoreFile.exists()) {
+        println 'invalid path for keystore file'
     } else {
-        println 'signing.properties found but some entries are missing'
+        println 'keystore.properties found but some entries are missing or invalid'
         android.buildTypes.release.signingConfig = null
     }
 } else {
-    println 'signing.properties not found'
+    println 'keystore.properties not found'
     android.buildTypes.release.signingConfig = null
 }
