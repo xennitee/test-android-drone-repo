@@ -90,5 +90,5 @@ $RECYCLE.BIN/
 /.settings/
 /src/.project
 /src/.settings/
-/signing.properties
+/keystore.properties
 /build/intermediates/
