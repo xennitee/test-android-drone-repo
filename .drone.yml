@@ -12,7 +12,12 @@ steps:
   - name: cache
     path: /data/drone/cache/
   commands:
+    - pwd
+    - ls /data/drone/
+    - ls /data/drone/cache/
+    - cp /data/drone/cache/keystore.properties .
     - ls -al
+    - ./gradlew buildDebug
   when:
     event: pull_request
     branch:
@@ -24,6 +29,7 @@ steps:
   - name: cache
     path: /data/drone/cache/
   commands:
+    - cp /data/drone/cache/keystore.properties .
     - ./gradlew assembleRelease
   when:
     event:
@@ -42,3 +48,8 @@ steps:
   when:
     event:
     - tag
+
+volumes:
+- name: cache
+  host:
+    path: /data/drone/.android
