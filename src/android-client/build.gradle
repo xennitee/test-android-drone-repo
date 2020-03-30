@@ -78,7 +78,12 @@ dependencies {
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
 //def keystorePropertiesFile = rootProject.file("keystore.properties")
-def keystorePropertiesFile = file("D:/git/keystore.properties")
+def keystorePropertiesFile
+if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+    keystorePropertiesFile = file("D:/git/keystore.properties")
+} else {
+    keystorePropertiesFile = file("/data/drone/.android/keystore.properties")
+}
 
 // Initialize a new Properties() object called keystoreProperties.
 def keystoreProperties = new Properties()
