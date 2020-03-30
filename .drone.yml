@@ -10,9 +10,12 @@ steps:
   image: xennitee/android-docker-image:0
   volumes:
   - name: cache
-    path: /drone/src/
+    path: /data/drone/cache/
   commands:
     - pwd
+    - ls /data/drone/
+    - ls /data/drone/cache/
+    - cp /data/drone/cache/keystore.properties .
     - ls -al
     - ./gradlew buildDebug
   when:
@@ -24,7 +27,7 @@ steps:
   image: xennitee/android-docker-image:0
   volumes:
   - name: cache
-    path: /drone/src/
+    path: /data/drone/cache/
   commands:
     - ./gradlew assembleRelease
   when:
