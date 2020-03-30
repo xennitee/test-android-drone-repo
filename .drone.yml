@@ -24,7 +24,7 @@ steps:
   - name: cache
     path: /data/drone/cache/
   commands:
-    - ./gradlew assembleDebug
+    - ./gradlew assembleRelease
   when:
     event:
     - tag
@@ -34,7 +34,7 @@ steps:
   settings:
     api_key:
       from_secret: github_release_token
-    files: src/android-client/build/outputs/apk/debug/*.apk
+    files: src/android-client/build/outputs/apk/release/*.apk
     draft: true
     prerelease: true
     note: src/android-client/CHANGELOG.md
