@@ -29,6 +29,7 @@ steps:
   - name: cache
     path: /data/drone/cache/
   commands:
+    - cp /data/drone/cache/keystore.properties .
     - ./gradlew assembleRelease
   when:
     event:
