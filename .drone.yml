@@ -13,6 +13,7 @@ steps:
     path: /data/drone/cache/
   commands:
     - ls -al
+    - ./gradlew buildDebug
   when:
     event: pull_request
     branch:
@@ -42,3 +43,8 @@ steps:
   when:
     event:
     - tag
+
+volumes:
+- name: cache
+  host:
+    path: /data/drone/.android

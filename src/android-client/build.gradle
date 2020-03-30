@@ -77,13 +77,11 @@ dependencies {
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
-def keystorePropertiesFile
+def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keyFileName
 if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
-    keystorePropertiesFile = rootProject.file("keystore.properties")
     keyFileName = 'KEYSTORE_FILE_WINDOWS'
 } else {
-    keystorePropertiesFile = file("/data/drone/.android/keystore.properties")
     keyFileName = 'KEYSTORE_FILE_LINUX'
 }
 
